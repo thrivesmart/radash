@@ -1,0 +1,78 @@
+
+<% content_for :page_title do %>
+Orgs - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+        &nbsp;
+      </div>
+
+      <div class="pull-right">
+        <%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Org".html_safe, [:new, :org], class: "btn btn-success" %>
+      </div>
+      Listing Orgs
+    </h1>
+  </div>
+
+  <table class="table table-striped table-hover tablesorter" id="Orgs-table">
+
+
+    <thead>
+      <tr>
+    
+        <th><span>Name</span></th>
+        <th><span>Permalink</span></th>
+        <th><span>Email</span></th>
+        <th><span>Phone</span></th>
+        <th><span>Url</span></th>
+        <th><span>Owner</span></th>
+        <th><span>Street address1</span></th>
+        <th><span>Street address2</span></th>
+        <th><span>City</span></th>
+        <th><span>State province region</span></th>
+        <th><span>Zip postal code</span></th>
+        <th><span>Country code</span></th>
+        <th><span>Timezone</span></th>
+        <th><span>Currency code</span></th>
+      
+      </tr>
+    </thead>
+
+    <tbody>
+      <% unless @orgs.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="2">No orgs created yet.</td>
+      </tr>
+      <% end %>
+      <% @orgs.each do |org| %>
+      <tr class="linked-row" data-href="<%= org_path(org) %>">
+      
+        <td><%= link_to org.name, org %></td>
+        <td><%= link_to org.permalink, org %></td>
+        <td><%= link_to org.email, org %></td>
+        <td><%= link_to org.phone, org %></td>
+        <td><%= link_to org.url, org %></td>
+        <td><%= link_to org.owner, org %></td>
+        <td><%= link_to org.street_address1, org %></td>
+        <td><%= link_to org.street_address2, org %></td>
+        <td><%= link_to org.city, org %></td>
+        <td><%= link_to org.state_province_region, org %></td>
+        <td><%= link_to org.zip_postal_code, org %></td>
+        <td><%= link_to org.country_code, org %></td>
+        <td><%= link_to org.timezone, org %></td>
+        <td><%= link_to org.currency_code, org %></td>
+        
+        
+        
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+

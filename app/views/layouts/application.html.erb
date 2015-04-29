@@ -1,14 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Radash</title>
+  <title><%= yield :page_title %><%= @location ? "#{@location.name} - " : '' %><%= @org ? @org.name : 'HausWare' %></title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
   <%= csrf_meta_tags %>
+  <%= yield :after_css %>
 </head>
-<body>
+<body class="controller-<%= controller.controller_name.dasherize %> action-<%= controller.action_name.dasherize %>">  <nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= @org ? @org.url : '/' %>">reddit ads management <%= @org ? " - #{@org.name}"  : '' %></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+      </ul> 
+      <% if !authed_user %><%# ---- logged out ---- %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/sessions/new">Login</a></li>
+      </ul>
+      <% else %><%# ---- logged in ---- %>
+      <ul class="nav navbar-nav navbar-right">
+        <% if authed_user.superuser %>
+        <li<%= request.path.starts_with?("/superuser/") ? " class=\"active\"".html_safe : "" %>><a href="<%= superuser_users_path %>"><span class="glyphicon glyphicon-king" aria-hidden="true"></span> Superuser</a></li>
+        <% end %>
+        <% if @org && authed_administrator %>
+        <li<%= request.path.starts_with?("/admin/") ? " class=\"active\"".html_safe : "" %>><a href="<%= admin_org_path(@org) %>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Administrate <%= @org.name %></a></li>
+        <% end %>
+        <li<%= request.path.starts_with?("/account/") ? " class=\"active\"".html_safe : "" %>><a href="<%= account_user_path(authed_user) %>"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Account</a></li>
+        <li class="profile dropdown">
+          <a class="dropdown-toggle" type="button" id="profile-dropdown" data-toggle="dropdown" aria-expanded="false"><img src='<%= authed_user.picurl %>'> <%= authed_user.full_name %> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="profile-dropdown">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= user_path(authed_user) %>">Profile</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="/sessions/destroy">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+</nav>
+<% unless notice.blank? %>
+<div id="notice" class="alert alert-success" role="alert">
+  <div class="container">
+    <%= notice %>
+  </div>
+</div>
+<% end %>
+
+<% unless flash[:error].blank? %>
+<div id="flash-error" class="alert alert-danger" role="alert">
+  <div class="container">
+    <%= flash[:error] %>
+  </div>
+</div>
+<% end %>
 
 <%= yield %>
+<footer id="content-footer" role="contentinfo">
+  <div class="container">
+    <p class="align-center">
+      Copyright &copy; <%= Time.now.year %> reddit inc.
+    </p>
+  </div>
+</footer>
+
+<%= yield :before_js %>
+<% unless ENV["GOOGLE_ANALYTICS_ID"].blank? %>
+<script>
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,"script","//www.google-analytics.com/analytics.js","ga");
+ga("create", "<%= ENV["GOOGLE_ANALYTICS_ID"] %>", "auto");
+ga("send", "pageview");
+</script>
+<% end %>
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+<%= yield :after_js %>
+
 
 </body>
 </html>

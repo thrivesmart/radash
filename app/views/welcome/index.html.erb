@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Welcome to Reddit Ads Management<sup>[beta]</sup></h1>
+  <p>Handle your reddit advertising with ease.</p>
+  
+  <p><a href="/orgs" class="btn btn-default btn-lg">Organizations using reddit ads &raquo;</a></p>
+
+  <hr/>
+  
+  <% if !authed_user %><%# ---- logged out ---- %>
+  <p>For now, try <a href="/sessions/new">logging in</a>.</p>
+  <% else %><%# ---- logged in ---- %>
+  <p>Hi, <img src='<%= authed_user.picurl %>' style="max-width:2em; max-height:2em"> <%= authed_user.full_name%>.  See <%= link_to 'your profile', user_path(authed_user) %>.</p>
+  <% end %>
+</div>

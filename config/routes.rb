@@ -1,9 +1,32 @@
 Rails.application.routes.draw do
+
+  namespace :admin do
+    resources :orgs do
+      resources :memberships
+    end
+  end
+
+  namespace :account do
+    resources :users
+  end
+
+  namespace :superuser do
+    resources :users
+  end
+
+  resources :orgs
+  resources :users
+
+  # OmniAuth for all providers, see `config/initializers/omniauth.rb` for more
+  get '/auth/:provider/callback', to: 'sessions#create'
+  get 'sessions/new'
+  get 'sessions/destroy'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
