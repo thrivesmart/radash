@@ -7,7 +7,7 @@ class Campaign < ActiveRecord::Base
   
   validates :org, presence: true
   validates :total_budget_in_cents, presence: true
-  validates :goal_type, inclusion: { in: VALID_GOAL_TYPES, message: "%{value} bid type is not valid.", allow_nil: true }
+  validates :goal_type, inclusion: { in: VALID_GOAL_TYPES, message: "%{value} bid type is not valid.", allow_blank: true }
   
   serialize :flights, JSON
 end
