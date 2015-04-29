@@ -1,6 +1,10 @@
 class Org < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
   has_many :memberships, dependent: :destroy
+  has_many :assets, dependent: :destroy
+  has_many :creatives, dependent: :destroy
+  has_many :ads, dependent: :destroy
+  has_many :campaigns, dependent: :destroy
   
   before_validation :autofill_permalink_if_blank
   

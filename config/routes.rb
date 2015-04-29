@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :ads
-  resources :creatives
-  resources :campaigns
-  resources :assets
   namespace :admin do
     resources :orgs do
       resources :memberships
@@ -18,7 +14,12 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  resources :orgs
+  resources :orgs do
+    resources :ads
+    resources :creatives
+    resources :campaigns
+    resources :assets
+  end
   resources :users
 
   # OmniAuth for all providers, see `config/initializers/omniauth.rb` for more
