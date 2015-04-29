@@ -11,7 +11,105 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150429040609) do
+ActiveRecord::Schema.define(version: 20150429183822) do
+
+  create_table "ads", force: :cascade do |t|
+    t.integer  "org_id"
+    t.integer  "creative_id"
+    t.string   "bid_type"
+    t.integer  "bid_in_cents"
+    t.text     "locations"
+    t.text     "devices"
+    t.text     "os"
+    t.text     "os_versions"
+    t.text     "subreddits"
+    t.text     "interests"
+    t.text     "placements"
+    t.datetime "paused_at"
+    t.datetime "approved_at"
+    t.string   "approver_name"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "ads", ["approved_at"], name: "index_ads_on_approved_at"
+  add_index "ads", ["approver_name"], name: "index_ads_on_approver_name"
+  add_index "ads", ["bid_type"], name: "index_ads_on_bid_type"
+  add_index "ads", ["creative_id"], name: "index_ads_on_creative_id"
+  add_index "ads", ["org_id", "bid_type"], name: "index_ads_on_org_id_and_bid_type"
+  add_index "ads", ["org_id", "creative_id"], name: "index_ads_on_org_id_and_creative_id"
+  add_index "ads", ["org_id"], name: "index_ads_on_org_id"
+  add_index "ads", ["paused_at"], name: "index_ads_on_paused_at"
+
+  create_table "ads_campaigns", id: false, force: :cascade do |t|
+    t.integer "ad_id"
+    t.integer "campaign_id"
+  end
+
+  add_index "ads_campaigns", ["ad_id"], name: "index_ads_campaigns_on_ad_id"
+  add_index "ads_campaigns", ["campaign_id"], name: "index_ads_campaigns_on_campaign_id"
+
+  create_table "assets", force: :cascade do |t|
+    t.integer  "org_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.text     "html"
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "assets", ["height"], name: "index_assets_on_height"
+  add_index "assets", ["org_id", "width", "height"], name: "index_assets_on_org_id_and_width_and_height"
+  add_index "assets", ["org_id"], name: "index_assets_on_org_id"
+  add_index "assets", ["width"], name: "index_assets_on_width"
+
+  create_table "campaigns", force: :cascade do |t|
+    t.integer  "org_id"
+    t.integer  "total_budget_in_cents"
+    t.integer  "goal_value"
+    t.string   "goal_type"
+    t.text     "flights"
+    t.datetime "paused_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "campaigns", ["org_id", "paused_at"], name: "index_campaigns_on_org_id_and_paused_at"
+  add_index "campaigns", ["org_id"], name: "index_campaigns_on_org_id"
+  add_index "campaigns", ["paused_at"], name: "index_campaigns_on_paused_at"
+
+  create_table "creatives", force: :cascade do |t|
+    t.integer  "org_id"
+    t.integer  "asset_id"
+    t.string   "title"
+    t.string   "url"
+    t.string   "postername"
+    t.string   "posterid"
+    t.string   "promoted_thingid"
+    t.string   "locale"
+    t.string   "attachment_type"
+    t.text     "attachment_html"
+    t.datetime "approved_at"
+    t.string   "approver_name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "creatives", ["approved_at"], name: "index_creatives_on_approved_at"
+  add_index "creatives", ["approver_name"], name: "index_creatives_on_approver_name"
+  add_index "creatives", ["asset_id"], name: "index_creatives_on_asset_id"
+  add_index "creatives", ["locale"], name: "index_creatives_on_locale"
+  add_index "creatives", ["org_id", "locale"], name: "index_creatives_on_org_id_and_locale"
+  add_index "creatives", ["org_id"], name: "index_creatives_on_org_id"
+  add_index "creatives", ["posterid"], name: "index_creatives_on_posterid"
+  add_index "creatives", ["postername"], name: "index_creatives_on_postername"
+  add_index "creatives", ["promoted_thingid"], name: "index_creatives_on_promoted_thingid"
+  add_index "creatives", ["title"], name: "index_creatives_on_title"
+  add_index "creatives", ["url"], name: "index_creatives_on_url"
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "org_id"

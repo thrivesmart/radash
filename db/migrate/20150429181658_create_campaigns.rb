@@ -6,9 +6,10 @@ class CreateCampaigns < ActiveRecord::Migration
       t.integer :goal_value
       t.string :goal_type
       t.text :flights
-      t.datetime :paused_at
+      t.datetime :paused_at, index: true
 
       t.timestamps null: false
     end
+    add_index :campaigns, [:org_id, :paused_at]
   end
 end

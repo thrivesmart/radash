@@ -4,10 +4,11 @@ class CreateAssets < ActiveRecord::Migration
       t.references :org, index: true, foreign_key: true
       t.attachment :file
       t.text :html
-      t.integer :width
-      t.integer :height
+      t.integer :width, index: true
+      t.integer :height, index: true
 
       t.timestamps null: false
     end
+    add_index :assets, [:org_id, :width, :height]
   end
 end
