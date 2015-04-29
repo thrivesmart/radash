@@ -99,6 +99,10 @@ Org Details -
   Step 2: <%= link_to 'Build Creative', org_creatives_path(@org) %> to be used in your ads, by writing them!
   <% elsif @org.ads.count == 0 %>
   Step 3: <%= link_to 'Setup Ads', org_ads_path(@org) %> to tie creatives to targeting!
+  <% elsif @org.campaigns.count == 0 %>
+  Step 4: <%= link_to 'Run a campaign', org_campaigns_path(@org) %> for your ads!
+  <% else %>
+  Looks like you're doing great :) <%= link_to 'Check on your campaigns', org_campaigns_path(@org) %>.
   <% end %>
   </h3>
 
