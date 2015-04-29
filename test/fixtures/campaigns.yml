@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  org_id: 
+  total_budget_in_cents: 1
+  goal_value: 1
+  goal_type: MyString
+  flights: MyText
+  paused_at: 2015-04-29 11:16:58
+
+two:
+  org_id: 
+  total_budget_in_cents: 1
+  goal_value: 1
+  goal_type: MyString
+  flights: MyText
+  paused_at: 2015-04-29 11:16:58

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  org_id: 
+  file: 
+  html: MyText
+  width: 1
+  height: 1
+
+two:
+  org_id: 
+  file: 
+  html: MyText
+  width: 1
+  height: 1

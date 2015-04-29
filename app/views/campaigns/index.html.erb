@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :page_title do %>
+Campaigns - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+<div class="pull-left">
+<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+&nbsp;
+</div>
+
+<div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Campaign".html_safe, [:new, :campaign], class: "btn btn-success" %>
+</div>
+Listing Campaigns
+</h1>
+</div>
+
+<table class="table table-striped table-hover tablesorter" id="Campaigns-table">
+
+
+  <thead>
+<tr>
+    
+      <th><span>Org</span></th>
+      <th><span>Total budget in cents</span></th>
+      <th><span>Goal value</span></th>
+      <th><span>Goal type</span></th>
+      <th><span>Flights</span></th>
+      <th><span>Paused at</span></th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% unless @campaigns.any? %>
+<tr id="empty-table">
+<td class="bg-warning" colspan="2">No campaigns created yet.</td>
+</tr>
+<% end %>
+<% @campaigns.each do |campaign| %>
+<tr class="linked-row" data-href="<%= campaign_path(campaign) %>">
+      
+        <td><%= link_to campaign.org, campaign %></td>
+        <td><%= link_to campaign.total_budget_in_cents, campaign %></td>
+        <td><%= link_to campaign.goal_value, campaign %></td>
+        <td><%= link_to campaign.goal_type, campaign %></td>
+        <td><%= link_to campaign.flights, campaign %></td>
+        <td><%= link_to campaign.paused_at, campaign %></td>
+        
+        
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+
+

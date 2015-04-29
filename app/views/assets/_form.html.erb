@@ -1,0 +1,57 @@
+<%= form_for(@asset) do |f| %>
+  <% if @asset.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <strong><%= pluralize(@asset.errors.count, "error") %> prohibited this asset from being saved:</strong>
+
+      <ul>
+      <% @asset.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:org_id].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :org_id, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :org_id, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:file].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :file, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :file, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:html].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :html, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_area :html, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:width].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :width, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :width, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:height].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :height, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :height, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="actions text-center">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+<% end %>

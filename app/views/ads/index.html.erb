@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :page_title do %>
+Ads - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+<div class="pull-left">
+<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+&nbsp;
+</div>
+
+<div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Ad".html_safe, [:new, :ad], class: "btn btn-success" %>
+</div>
+Listing Ads
+</h1>
+</div>
+
+<table class="table table-striped table-hover tablesorter" id="Ads-table">
+
+
+  <thead>
+<tr>
+    
+      <th><span>Org</span></th>
+      <th><span>Creative</span></th>
+      <th><span>Bid type</span></th>
+      <th><span>Bid in cents</span></th>
+      <th><span>Locations</span></th>
+      <th><span>Devices</span></th>
+      <th><span>Os</span></th>
+      <th><span>Os versions</span></th>
+      <th><span>Subreddits</span></th>
+      <th><span>Interests</span></th>
+      <th><span>Placements</span></th>
+      <th><span>Paused at</span></th>
+      <th><span>Approved at</span></th>
+      <th><span>Approver name</span></th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% unless @ads.any? %>
+<tr id="empty-table">
+<td class="bg-warning" colspan="2">No ads created yet.</td>
+</tr>
+<% end %>
+<% @ads.each do |ad| %>
+<tr class="linked-row" data-href="<%= ad_path(ad) %>">
+      
+        <td><%= link_to ad.org, ad %></td>
+        <td><%= link_to ad.creative, ad %></td>
+        <td><%= link_to ad.bid_type, ad %></td>
+        <td><%= link_to ad.bid_in_cents, ad %></td>
+        <td><%= link_to ad.locations, ad %></td>
+        <td><%= link_to ad.devices, ad %></td>
+        <td><%= link_to ad.os, ad %></td>
+        <td><%= link_to ad.os_versions, ad %></td>
+        <td><%= link_to ad.subreddits, ad %></td>
+        <td><%= link_to ad.interests, ad %></td>
+        <td><%= link_to ad.placements, ad %></td>
+        <td><%= link_to ad.paused_at, ad %></td>
+        <td><%= link_to ad.approved_at, ad %></td>
+        <td><%= link_to ad.approver_name, ad %></td>
+        
+        
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+
+

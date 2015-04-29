@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  org_id: 
+  creative_id: 
+  bid_type: MyString
+  bid_in_cents: 1
+  locations: MyText
+  devices: MyText
+  os: MyText
+  os_versions: MyText
+  subreddits: MyText
+  interests: MyText
+  placements: MyText
+  paused_at: 2015-04-29 11:38:23
+  approved_at: 2015-04-29 11:38:23
+  approver_name: MyString
+
+two:
+  org_id: 
+  creative_id: 
+  bid_type: MyString
+  bid_in_cents: 1
+  locations: MyText
+  devices: MyText
+  os: MyText
+  os_versions: MyText
+  subreddits: MyText
+  interests: MyText
+  placements: MyText
+  paused_at: 2015-04-29 11:38:23
+  approved_at: 2015-04-29 11:38:23
+  approver_name: MyString

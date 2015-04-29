@@ -1,0 +1,1 @@
+json.extract! @creative, :id, :org_id, :asset_id, :title, :url, :postername, :posterid, :promoted_thingid, :locale, :attachment_type, :attachment_html, :approved_at, :approver_name, :created_at, :updated_at

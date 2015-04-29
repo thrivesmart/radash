@@ -1,0 +1,65 @@
+<%= form_for(@campaign) do |f| %>
+  <% if @campaign.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <strong><%= pluralize(@campaign.errors.count, "error") %> prohibited this campaign from being saved:</strong>
+
+      <ul>
+      <% @campaign.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:org_id].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :org_id, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :org_id, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:total_budget_in_cents].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :total_budget_in_cents, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :total_budget_in_cents, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:goal_value].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :goal_value, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :goal_value, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:goal_type].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :goal_type, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :goal_type, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:flights].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :flights, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_area :flights, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:paused_at].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :paused_at, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.datetime_select :paused_at, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="actions text-center">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+<% end %>

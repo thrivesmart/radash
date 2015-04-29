@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :page_title do %>
+Assets - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+<div class="pull-left">
+<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+&nbsp;
+</div>
+
+<div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Asset".html_safe, [:new, :asset], class: "btn btn-success" %>
+</div>
+Listing Assets
+</h1>
+</div>
+
+<table class="table table-striped table-hover tablesorter" id="Assets-table">
+
+
+  <thead>
+<tr>
+    
+      <th><span>Org</span></th>
+      <th><span>File</span></th>
+      <th><span>Html</span></th>
+      <th><span>Width</span></th>
+      <th><span>Height</span></th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% unless @assets.any? %>
+<tr id="empty-table">
+<td class="bg-warning" colspan="2">No assets created yet.</td>
+</tr>
+<% end %>
+<% @assets.each do |asset| %>
+<tr class="linked-row" data-href="<%= asset_path(asset) %>">
+      
+        <td><%= link_to asset.org, asset %></td>
+        <td><%= link_to asset.file, asset %></td>
+        <td><%= link_to asset.html, asset %></td>
+        <td><%= link_to asset.width, asset %></td>
+        <td><%= link_to asset.height, asset %></td>
+        
+        
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+
+
