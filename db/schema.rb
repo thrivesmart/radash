@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150429183822) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "name"
     t.text     "html"
     t.integer  "width"
     t.integer  "height"
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20150429183822) do
   end
 
   add_index "assets", ["height"], name: "index_assets_on_height"
+  add_index "assets", ["name"], name: "index_assets_on_name"
   add_index "assets", ["org_id", "width", "height"], name: "index_assets_on_org_id_and_width_and_height"
   add_index "assets", ["org_id"], name: "index_assets_on_org_id"
   add_index "assets", ["width"], name: "index_assets_on_width"

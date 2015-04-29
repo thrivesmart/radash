@@ -3,6 +3,7 @@ class CreateAssets < ActiveRecord::Migration
     create_table :assets do |t|
       t.references :org, index: true, foreign_key: true
       t.attachment :file
+      t.string :name, index: true
       t.text :html
       t.integer :width, index: true
       t.integer :height, index: true

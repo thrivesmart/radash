@@ -1,129 +1,100 @@
-<%= form_for(@ad) do |f| %>
-  <% if @ad.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger" role="alert">
-      <strong><%= pluralize(@ad.errors.count, "error") %> prohibited this ad from being saved:</strong>
+<%= form_for([@ad.org, @ad]) do |f| %>
+<% if @ad.errors.any? %>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+  <strong><%= pluralize(@ad.errors.count, "error") %> prohibited this ad from being saved:</strong>
 
-      <ul>
-      <% @ad.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <ul>
+    <% @ad.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+
+<div class="row">
+  <div class="form-group<%= f.object.errors[:creative_id].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :creative_id, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.select :creative_id, @org.creatives.order(title: :asc).map {|a| [ a.title, a.id ] }, { prompt: '-Select Creative-' }, { class: "form-control" } %>
     </div>
-  <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:bid_type].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :bid_type, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.select :bid_type, Ad::BID_TYPES.keys.map {|k| [ Ad::BID_TYPES[k], k.to_s ] }, { prompt: '-Select Bid Type-' }, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:bid_in_cents].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :bid_in_cents, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.number_field :bid_in_cents, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:locations].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :locations, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :locations, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:devices].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :devices, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :devices, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:os].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :os, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :os, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:os_versions].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :os_versions, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :os_versions, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:subreddits].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :subreddits, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :subreddits, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:interests].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :interests, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :interests, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:placements].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :placements, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :placements, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
 
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:org_id].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :org_id, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_field :org_id, { class: "form-control" } %>
+
+<div class="actions text-center">
+  <%= f.submit class: "btn btn-success" %>
 </div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:creative_id].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :creative_id, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_field :creative_id, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:bid_type].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :bid_type, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_field :bid_type, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:bid_in_cents].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :bid_in_cents, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.number_field :bid_in_cents, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:locations].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :locations, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_area :locations, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:devices].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :devices, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_area :devices, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:os].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :os, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_area :os, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:os_versions].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :os_versions, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_area :os_versions, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:subreddits].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :subreddits, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_area :subreddits, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:interests].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :interests, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_area :interests, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:placements].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :placements, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_area :placements, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:paused_at].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :paused_at, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.datetime_select :paused_at, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:approved_at].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :approved_at, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.datetime_select :approved_at, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:approver_name].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :approver_name, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_field :approver_name, { class: "form-control" } %>
-</div>
-</div>
-  </div>
-  <div class="actions text-center">
-    <%= f.submit class: "btn btn-success" %>
-  </div>
 <% end %>

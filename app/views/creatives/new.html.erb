@@ -2,14 +2,15 @@
 Create Creative - 
 <% end %>
 <div class="container">
-<div class="page-header">
-<h1>
-New Creative
-</h1>
-</div>
+  <div class="page-header">
+    <h1>
+      New Creative
+      <small><%= @org.name %></small>
+    </h1>
+  </div>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<div class="clearfix"></div>
-<%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, creatives_path, class: "btn btn-default" %>
+  <div class="clearfix"></div>
+  <%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, org_creatives_path(@org), class: "btn btn-default" %>
 </div>

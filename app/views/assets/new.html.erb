@@ -2,14 +2,15 @@
 Create Asset - 
 <% end %>
 <div class="container">
-<div class="page-header">
-<h1>
-New Asset
-</h1>
-</div>
+  <div class="page-header">
+    <h1>
+      New Asset
+      <small><%= @org.name %></small>
+    </h1>
+  </div>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<div class="clearfix"></div>
-<%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, assets_path, class: "btn btn-default" %>
+  <div class="clearfix"></div>
+  <%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, [@asset.org, :assets], class: "btn btn-default" %>
 </div>

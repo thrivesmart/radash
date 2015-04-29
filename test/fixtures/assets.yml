@@ -3,6 +3,7 @@
 one:
   org_id: 
   file: 
+  name: MyString
   html: MyText
   width: 1
   height: 1
@@ -10,6 +11,7 @@ one:
 two:
   org_id: 
   file: 
+  name: MyString
   html: MyText
   width: 1
   height: 1

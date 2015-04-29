@@ -1,10 +1,12 @@
 class AdsController < ApplicationController
+  before_action :set_org
+  before_filter :enforce_org_administrator
   before_action :set_ad, only: [:show, :edit, :update, :destroy]
 
   # GET /ads
   # GET /ads.json
   def index
-    @ads = Ad.all
+    @ads = @org.ads
   end
 
   # GET /ads/1
@@ -14,7 +16,7 @@ class AdsController < ApplicationController
 
   # GET /ads/new
   def new
-    @ad = Ad.new
+    @ad = @org.ads.build
   end
 
   # GET /ads/1/edit
@@ -24,12 +26,12 @@ class AdsController < ApplicationController
   # POST /ads
   # POST /ads.json
   def create
-    @ad = Ad.new(ad_params)
+    @ad = @org.ads.build(ad_params)
 
     respond_to do |format|
       if @ad.save
-        format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
-        format.json { render :show, status: :created, location: @ad }
+        format.html { redirect_to [@ad.org, @ad], notice: 'Ad was successfully created.' }
+        format.json { render :show, status: :created, location: [@ad.org, @ad] }
       else
         format.html { render :new }
         format.json { render json: @ad.errors, status: :unprocessable_entity }
@@ -42,8 +44,8 @@ class AdsController < ApplicationController
   def update
     respond_to do |format|
       if @ad.update(ad_params)
-        format.html { redirect_to @ad, notice: 'Ad was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ad }
+        format.html { redirect_to [@ad.org, @ad], notice: 'Ad was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@ad.org, @ad] }
       else
         format.html { render :edit }
         format.json { render json: @ad.errors, status: :unprocessable_entity }
@@ -56,19 +58,26 @@ class AdsController < ApplicationController
   def destroy
     @ad.destroy
     respond_to do |format|
-      format.html { redirect_to ads_url, notice: 'Ad was successfully destroyed.' }
+      format.html { redirect_to org_ads_url(@ad.org), notice: 'Ad was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ad
-      @ad = Ad.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def ad_params
-      params.require(:ad).permit(:org_id, :creative_id, :bid_type, :bid_in_cents, :locations, :devices, :os, :os_versions, :subreddits, :interests, :placements, :paused_at, :approved_at, :approver_name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_org
+    @org = Org.find_by_permalink(params[:org_id])
+    raise ActiveRecord::RecordNotFound unless @org
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ad
+    @ad = @org.ads.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def ad_params
+    params.require(:ad).permit(:creative_id, :bid_type, :bid_in_cents, :locations, :devices, :os, :os_versions, :subreddits, :interests, :placements)
+  end
 end

@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-org Details - 
+Org Details - 
 <% end %>
 <div class="container">
   <div class="page-header">
@@ -15,6 +15,7 @@ org Details -
       </div>
       <% end %>
       Org Details
+      <small><%= @org.name %></small>
     </h1>
   </div>
 
@@ -88,5 +89,39 @@ org Details -
     <div class="col-sm-9"><%= @org.currency_code %></div>
   </div>
 
+
+  <hr/>
+  
+  <h3>
+  <% if @org.assets.count == 0 %>
+  Step 1: <%= link_to 'Add Assets', org_assets_path(@org) %> to be used in your ads, by uploading them!
+  <% elsif @org.creatives.count == 0 %>
+  Step 2: <%= link_to 'Build Creative', org_creatives_path(@org) %> to be used in your ads, by writing them!
+  <% elsif @org.ads.count == 0 %>
+  Step 3: <%= link_to 'Setup Ads', org_ads_path(@org) %> to tie creatives to targeting!
+  <% end %>
+  </h3>
+
+  <hr/>
+  
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Campaigns</label>
+    <div class="col-sm-9"><%= link_to @org.campaigns.count, org_campaigns_path(@org) %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Ads</label>
+    <div class="col-sm-9"><%= link_to @org.ads.count, org_ads_path(@org) %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Creatives</label>
+    <div class="col-sm-9"><%= link_to @org.creatives.count, org_creatives_path(@org) %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Asset Library</label>
+    <div class="col-sm-9"><%= link_to @org.assets.count, org_assets_path(@org) %></div>
+  </div>
 </div>
 

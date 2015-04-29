@@ -1,73 +1,71 @@
-<p id="notice"><%= notice %></p>
-
 <% content_for :page_title do %>
 Creatives - 
 <% end %>
 <div class="container">
-<div class="page-header">
-<h1>
-<div class="pull-left">
-<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
-&nbsp;
-</div>
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, admin_org_path(@org), class: "btn btn-default", title: "Back" %>
+        &nbsp;
+      </div>
 
-<div class="pull-right">
-<%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Creative".html_safe, [:new, :creative], class: "btn btn-success" %>
-</div>
-Listing Creatives
-</h1>
-</div>
+      <div class="pull-right">
+        <%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Creative".html_safe, [:new, @org, :creative], class: "btn btn-success" %>
+      </div>
+      Listing Creatives
 
-<table class="table table-striped table-hover tablesorter" id="Creatives-table">
+      <small><%= @org.name %></small>
+    </h1>
+  </div>
+
+  <table class="table table-striped table-hover tablesorter" id="Creatives-table">
 
 
-  <thead>
-<tr>
+    <thead>
+      <tr>
+  
+        <th><span>Asset</span></th>
+        <th><span>Title</span></th>
+        <th><span>Url</span></th>
+        <th><span>Postername</span></th>
+        <th><span>Posterid</span></th>
+        <th><span>Promoted thingid</span></th>
+        <th><span>Locale</span></th>
+        <th><span>Attachment type</span></th>
+        <th><span>Attachment html</span></th>
+        <th><span>Approved at</span></th>
+        <th><span>Approver name</span></th>
     
-      <th><span>Org</span></th>
-      <th><span>Asset</span></th>
-      <th><span>Title</span></th>
-      <th><span>Url</span></th>
-      <th><span>Postername</span></th>
-      <th><span>Posterid</span></th>
-      <th><span>Promoted thingid</span></th>
-      <th><span>Locale</span></th>
-      <th><span>Attachment type</span></th>
-      <th><span>Attachment html</span></th>
-      <th><span>Approved at</span></th>
-      <th><span>Approver name</span></th>
-      
-    </tr>
-  </thead>
-
-  <tbody>
-    <% unless @creatives.any? %>
-<tr id="empty-table">
-<td class="bg-warning" colspan="2">No creatives created yet.</td>
-</tr>
-<% end %>
-<% @creatives.each do |creative| %>
-<tr class="linked-row" data-href="<%= creative_path(creative) %>">
-      
-        <td><%= link_to creative.org, creative %></td>
-        <td><%= link_to creative.asset, creative %></td>
-        <td><%= link_to creative.title, creative %></td>
-        <td><%= link_to creative.url, creative %></td>
-        <td><%= link_to creative.postername, creative %></td>
-        <td><%= link_to creative.posterid, creative %></td>
-        <td><%= link_to creative.promoted_thingid, creative %></td>
-        <td><%= link_to creative.locale, creative %></td>
-        <td><%= link_to creative.attachment_type, creative %></td>
-        <td><%= link_to creative.attachment_html, creative %></td>
-        <td><%= link_to creative.approved_at, creative %></td>
-        <td><%= link_to creative.approver_name, creative %></td>
-        
-        
-        
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% unless @creatives.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="11">No creatives created yet.</td>
+      </tr>
+      <% end %>
+      <% @creatives.each do |creative| %>
+      <tr class="linked-row" data-href="<%= org_creative_path(creative.org, creative) %>">
+    
+        <td><%= link_to creative.asset.id, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.title, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.url, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.postername, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.posterid, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.promoted_thingid, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.locale, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.attachment_type, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.attachment_html, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.approved_at, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.approver_name, org_creative_path(creative.org, creative) %></td>
+      
+      
+      
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 

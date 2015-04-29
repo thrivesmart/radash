@@ -16,7 +16,7 @@ class CreativesController < ApplicationController
 
   # GET /creatives/new
   def new
-    @creative = @org.creatives.build
+    @creative = @org.creatives.build(locale: 'en-US')
   end
 
   # GET /creatives/1/edit
