@@ -12,7 +12,7 @@ Ads -
       <div class="pull-right">
         <%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Ad".html_safe, [:new, @org, :ad], class: "btn btn-success" %>
       </div>
-      Listing Ads
+      Listing Ads!
       <small><%= @org.name %></small>
     </h1>
   </div>
@@ -52,13 +52,13 @@ Ads -
         <td><%= link_to ad.creative.title, org_ad_path(ad.org, ad) %></td>
         <td><%= link_to ad.bid_type, org_ad_path(ad.org, ad) %></td>
         <td><%= link_to ad.bid_in_cents, org_ad_path(ad.org, ad) %></td>
-        <td><%= link_to ad.locations, org_ad_path(ad.org, ad) %></td>
-        <td><%= link_to ad.devices, org_ad_path(ad.org, ad) %></td>
-        <td><%= link_to ad.os, org_ad_path(ad.org, ad) %></td>
-        <td><%= link_to ad.os_versions, org_ad_path(ad.org, ad) %></td>
-        <td><%= link_to ad.subreddits, org_ad_path(ad.org, ad) %></td>
-        <td><%= link_to ad.interests, org_ad_path(ad.org, ad) %></td>
-        <td><%= link_to ad.placements, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.locations.blank? ? '[all]' : ad.locations, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.devices.blank? ? '[all]' : ad.devices, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.os.blank? ? '[all]' : ad.os, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.os_versions.blank? ? '[all]' : ad.os_versions, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.subreddits.blank? ? '[all]' : ad.subreddits, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.interests.blank? ? '[all]' : ad.interests, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.placements.blank? ? '[all]' : ad.placements, org_ad_path(ad.org, ad) %></td>
         <td><%= link_to ad.paused_at, org_ad_path(ad.org, ad) %></td>
         <td><%= link_to ad.approved_at, org_ad_path(ad.org, ad) %></td>
         <td><%= link_to ad.approver_name, org_ad_path(ad.org, ad) %></td>

@@ -80,7 +80,7 @@ campaign Details -
       <% end %>
       <% @campaign.ads.each do |ad| %>
       <tr>
-        <td><%= ad.title %></td>
+        <td><%= link_to ad.title, [ad.org, ad] %></td>
         <td><%= link_to "<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span> Delete Ad...".html_safe, org_campaign_ads_campaign_path(@campaign.org, @campaign, ad), method: :delete, data: { confirm: "Are you sure you want to remove this ad from this campaign?" }, class: "btn btn-danger" %></td>
       </tr>
       <% end %>
