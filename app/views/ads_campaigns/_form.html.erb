@@ -1,0 +1,24 @@
+<%= form_tag(org_campaign_ads_campaigns_path(@org, @campaign), method: :post) do %>
+<% if @ads_campaigns.errors.any? %>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+  <strong><%= pluralize(@ads_campaigns.errors.count, "error") %> prohibited this ad from being added:</strong>
+
+  <ul>
+    <% @ads_campaigns.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="row">
+  <div class="form-group<%= @ads_campaigns.errors[:ad_id].empty? ? "" : " has-error has-feedback" %>">
+    <%= label_tag 'ads_campaigns[ad_id]', 'Ad', { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= select_tag 'ads_campaigns[ad_id]', options_for_select(@org.ads.map {|a| [ a.title, a.id ] }), { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="actions text-center">
+  <%= submit_tag 'Run', class: "btn btn-success" %>
+</div>
+<% end %>

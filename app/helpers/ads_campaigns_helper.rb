@@ -1,0 +1,2 @@
+module AdsCampaignsHelper
+end

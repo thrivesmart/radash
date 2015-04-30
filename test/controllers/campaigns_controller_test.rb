@@ -18,7 +18,7 @@ class CampaignsControllerTest < ActionController::TestCase
 
   test "should create campaign" do
     assert_difference('Campaign.count') do
-      post :create, campaign: { flights: @campaign.flights, goal_type: @campaign.goal_type, goal_value: @campaign.goal_value, org_id: @campaign.org_id, paused_at: @campaign.paused_at, total_budget_in_cents: @campaign.total_budget_in_cents }
+      post :create, campaign: { flights: @campaign.flights, name: @campaign.name, goal_type: @campaign.goal_type, goal_value: @campaign.goal_value, org_id: @campaign.org_id, paused_at: @campaign.paused_at, total_budget_in_cents: @campaign.total_budget_in_cents }
     end
 
     assert_redirected_to campaign_path(assigns(:campaign))
@@ -35,7 +35,7 @@ class CampaignsControllerTest < ActionController::TestCase
   end
 
   test "should update campaign" do
-    patch :update, id: @campaign, campaign: { flights: @campaign.flights, goal_type: @campaign.goal_type, goal_value: @campaign.goal_value, org_id: @campaign.org_id, paused_at: @campaign.paused_at, total_budget_in_cents: @campaign.total_budget_in_cents }
+    patch :update, id: @campaign, campaign: { flights: @campaign.flights, name: @campaign.name, goal_type: @campaign.goal_type, goal_value: @campaign.goal_value, org_id: @campaign.org_id, paused_at: @campaign.paused_at, total_budget_in_cents: @campaign.total_budget_in_cents }
     assert_redirected_to campaign_path(assigns(:campaign))
   end
 

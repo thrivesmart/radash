@@ -18,4 +18,8 @@ class Ad < ActiveRecord::Base
   serialize :subreddits, JSON
   serialize :interests, JSON
   serialize :placements, JSON
+  
+  def title
+    "#{self.creative.title} @ $#{self.bid_in_cents / 100.00} #{self.bid_type}"
+  end
 end

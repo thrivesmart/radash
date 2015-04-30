@@ -71,13 +71,13 @@ class CampaignsController < ApplicationController
     raise ActiveRecord::RecordNotFound unless @org
   end
   
-    # Use callbacks to share common setup or constraints between actions.
-    def set_campaign
-      @campaign = @org.campaigns.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_campaign
+    @campaign = @org.campaigns.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def campaign_params
-      params.require(:campaign).permit(:org_id, :total_budget_in_cents, :goal_value, :goal_type, :flights, :paused_at)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def campaign_params
+    params.require(:campaign).permit(:total_budget_in_cents, :name, :goal_value, :goal_type, :flights)
+  end
 end

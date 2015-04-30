@@ -3,6 +3,7 @@
 one:
   org_id: 
   total_budget_in_cents: 1
+  name: MyString
   goal_value: 1
   goal_type: MyString
   flights: MyText
@@ -11,6 +12,7 @@ one:
 two:
   org_id: 
   total_budget_in_cents: 1
+  name: MyString
   goal_value: 1
   goal_type: MyString
   flights: MyText

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   namespace :admin do
     resources :orgs do
       resources :memberships
@@ -17,7 +18,9 @@ Rails.application.routes.draw do
   resources :orgs do
     resources :ads
     resources :creatives
-    resources :campaigns
+    resources :campaigns do
+      resources :ads_campaigns
+    end
     resources :assets
   end
   resources :users

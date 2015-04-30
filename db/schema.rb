@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150429183822) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "org_id"
+    t.string   "name"
     t.integer  "total_budget_in_cents"
     t.integer  "goal_value"
     t.string   "goal_type"

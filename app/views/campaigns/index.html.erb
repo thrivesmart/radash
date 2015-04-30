@@ -22,7 +22,8 @@ Campaigns -
 
     <thead>
       <tr>
-    
+
+        <th><span>Name</span></th>
         <th><span>Total budget in cents</span></th>
         <th><span>Goal value</span></th>
         <th><span>Goal type</span></th>
@@ -35,13 +36,14 @@ Campaigns -
     <tbody>
       <% unless @campaigns.any? %>
       <tr id="empty-table">
-        <td class="bg-warning" colspan="5">No campaigns created yet.</td>
+        <td class="bg-warning" colspan="6">No campaigns created yet.</td>
       </tr>
       <% end %>
       <% @campaigns.each do |campaign| %>
       <tr class="linked-row" data-href="<%= org_campaign_path(campaign.org, campaign) %>">
-      
-        <td><%= link_to campaign.total_budget_in_cents, org_campaign_path(campaign.org, campaign) %></td>
+    
+        <td><%= link_to campaign.name, org_campaign_path(campaign.org, campaign) %></td>
+        <td><%= link_to number_to_currency(campaign.total_budget_in_cents / 100.00), org_campaign_path(campaign.org, campaign) %></td>
         <td><%= link_to campaign.goal_value, org_campaign_path(campaign.org, campaign) %></td>
         <td><%= link_to campaign.goal_type, org_campaign_path(campaign.org, campaign) %></td>
         <td><%= link_to campaign.flights, org_campaign_path(campaign.org, campaign) %></td>
