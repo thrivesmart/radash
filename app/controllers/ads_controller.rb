@@ -16,7 +16,21 @@ class AdsController < ApplicationController
 
   # GET /ads/new
   def new
-    @ad = @org.ads.build
+    @ad = @org.ads.build(
+      locations: {
+        countries: { only: [], excluding: [] },
+        states_provinces_regions: { only: [], excluding: [] },
+        cities: { only: [], excluding: [] },
+        zips_postal_codes:  { only: [], excluding: [] },
+        locales:  { only: [], excluding: [] }
+      },
+      devices: { similar_to: [], only: [], excluding: [] },
+      os: { only: [], excluding: [] },
+      os_versions: { only: [], excluding: [] },
+      subreddits: { similar_to: [], only: [], excluding: [] },
+      interests: { similar_to: [], only: [], excluding: [] },
+      placements: { only: [], excluding: [] }
+    )
   end
 
   # GET /ads/1/edit

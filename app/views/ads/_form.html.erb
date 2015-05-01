@@ -37,22 +37,6 @@
   </div>
 </div>
 <div class="row">
-  <div class="form-group<%= f.object.errors[:locations].empty? ? "" : " has-error has-feedback" %>">
-    <%= f.label :locations, { class: "control-label col-sm-2" } %>
-    <div class="col-sm-10">
-      <%= f.text_area :locations, { class: "form-control" } %>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="form-group<%= f.object.errors[:devices].empty? ? "" : " has-error has-feedback" %>">
-    <%= f.label :devices, { class: "control-label col-sm-2" } %>
-    <div class="col-sm-10">
-      <%= f.text_area :devices, { class: "form-control" } %>
-    </div>
-  </div>
-</div>
-<div class="row">
   <div class="form-group<%= f.object.errors[:os].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :os, { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">
@@ -92,7 +76,22 @@
     </div>
   </div>
 </div>
-
+<div class="row">
+  <div class="form-group<%= f.object.errors[:devices].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :devices, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :devices, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:locations].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :locations, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :locations, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
 
 <div class="actions text-center">
   <%= f.submit class: "btn btn-success" %>
