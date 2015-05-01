@@ -4,12 +4,14 @@ namespace :subreddits do
     file_path = File.expand_path('../../../tmp/subreddits.json', __FILE__)
     first_url = "http://www.reddit.com/reddits.json?limit=100"
     url_template = "http://www.reddit.com/reddits.json?limit=100&after=AFTER_REPLACEMENT"
-    absolute_max = 800000
+    absolute_max = 800000 # 10000 # TMP only to limit
     
     if File.exist?(file_path)
       puts "ERROR: `#{file_path}` already exists, aborting!  Please move or delete the existing file."
     else
-      running_total = 0
+      running_total = 0 # 9000 # TMP only if still running
+      # next_after = 't5_2vj9k' # TMP only if still running
+      # current_url = url_template.gsub(/AFTER_REPLACEMENT/, next_after) # TMP only if still waiting
       current_url = first_url
       
       target_file = File.open(file_path, "w")
@@ -19,8 +21,15 @@ namespace :subreddits do
       target_file.puts "\"subreddits\":["
       target_file.close
   
-      while running_total < 200 do # absolute_max do
-        result_hash = ActiveSupport::JSON.decode(Net::HTTP.get(URI.parse(current_url)))
+      while running_total < absolute_max do
+        result_hash = {}
+        begin
+          result_hash = ActiveSupport::JSON.decode(Net::HTTP.get(URI.parse(current_url)))
+        rescue
+          puts "Ran into error, retrying in 20 seconds..."
+          sleep 20
+          next
+        end
         next_after = result_hash['data']['after']
         result_hash['data']['children'].each do |child|
           open(file_path, 'a') { |f|
@@ -34,7 +43,8 @@ namespace :subreddits do
           running_total += 1
         end
         current_url = url_template.gsub(/AFTER_REPLACEMENT/, next_after)
-        puts "Roundtrip complete, going to start on #{next_after}"
+        puts "At #{running_total} records, next roundtrip complete, going to start on #{next_after} in 10 seconds..."
+        sleep 10
       end
       
       open(file_path, 'a') { |f|
