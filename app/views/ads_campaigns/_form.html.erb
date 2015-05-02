@@ -14,7 +14,7 @@
   <div class="form-group<%= @ads_campaigns.errors[:ad_id].empty? ? "" : " has-error has-feedback" %>">
     <%= label_tag 'ads_campaigns[ad_id]', 'Ad', { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">
-      <%= select_tag 'ads_campaigns[ad_id]', options_for_select(@org.ads.map {|a| [ a.title, a.id ] }), { class: "form-control" } %>
+      <%= multiple: true, class: "multiselect form-control" 'ads_campaigns[ad_id]', options_for_select(@org.ads.map {|a| [ a.title, a.id ] }), { class: "form-control" } %>
     </div>
   </div>
 </div>

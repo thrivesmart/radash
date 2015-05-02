@@ -14,7 +14,9 @@ class Ad < ActiveRecord::Base
     'Blackberry' => ['6.0+', '7.0+', '7.1', '10.0+', '10.1+', '10.2+', '10.3+'],
     'Symbian' => ['9.3+', '9.4+', '9.5+', '10.0+', '10.1+']
   }
+  ALL_OS_VERSIONS = [].concat(OS_VERSIONS.keys.map { |k| OS_VERSIONS[k].map { |v| "#{k.downcase.underscore}-#{v}" } }).flatten
   DEVICES = [ 'Desktop/Laptop', 'Tablet', 'Smartphone', 'iPhone', 'iPad', 'iPod', 'Kindle Fire' ]
+  PLACEMENTS = [ 'Promoted Post', 'Mobile Feed', 'Right Hand Column' ]
   
   belongs_to :org
   belongs_to :creative

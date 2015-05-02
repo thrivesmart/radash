@@ -36,54 +36,143 @@
     </div>
   </div>
 </div>
+<hr/>
 <div class="row">
   <div class="form-group<%= f.object.errors[:os].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :os, { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">
-      <%= f.text_area :os, { class: "form-control" } %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= label_tag 'ad[os][only][]', 'Only:', { class: "control-label" } %>
+          <%= select_tag 'ad[os][only][]', options_for_select(
+              Ad::OS.map {|a| [ a, a ] }, 
+              f.object.os.blank? ? 
+                [] : 
+                f.object.os[:only]
+            ), 
+            { multiple: true, class: "multiselect form-control" } %>
+        </div>
+
+        <div class="col-md-6">
+          <%= label_tag 'ad[os][excluding][]', 'Excluding:', { class: "control-label" } %>
+          <%= select_tag 'ad[os][excluding][]', options_for_select(Ad::OS.map {|a| [ a, a ] }, f.object.os.blank? ? [] : f.object.os[:excluding]), { multiple: true, class: "multiselect form-control" } %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<hr/>
 <div class="row">
   <div class="form-group<%= f.object.errors[:os_versions].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :os_versions, { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">
-      <%= f.text_area :os_versions, { class: "form-control" } %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= label_tag 'ad[os_versions][only][]', 'Only:', { class: "control-label" } %>
+          <%= select_tag 'ad[os_versions][only][]', options_for_select(Ad::ALL_OS_VERSIONS.map {|a| [ a, a ] }, f.object.os_versions.blank? ? [] : f.object.os_versions[:only]), { multiple: true, class: "multiselect form-control" } %>
+        </div>
+
+        <div class="col-md-6">
+          <%= label_tag 'ad[os_versions][excluding][]', 'Excluding:', { class: "control-label" } %>
+          <%= select_tag 'ad[os_versions][excluding][]', options_for_select(Ad::ALL_OS_VERSIONS.map {|a| [ a, a ] }, f.object.os_versions.blank? ? [] : f.object.os_versions[:excluding]), { multiple: true, class: "multiselect form-control" } %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<hr/>
 <div class="row">
   <div class="form-group<%= f.object.errors[:subreddits].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :subreddits, { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">
-      <%= f.text_area :subreddits, { class: "form-control" } %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= label_tag 'ad[subreddits][similar_to][]', 'Similar To:', { class: "control-label" } %>
+          <%= select_tag 'ad[subreddits][similar_to][]', options_for_select([['Loading...','Loading...']], f.object.subreddits.blank? ? [] : f.object.subreddits[:similar_to]), { multiple: true, class: "server-multiselect form-control" } %>
+        </div>
+        
+        <div class="col-md-4">
+          <%= label_tag 'ad[subreddits][only][]', 'Only:', { class: "control-label" } %>
+          <%= select_tag 'ad[subreddits][only][]', options_for_select([['Loading...','Loading...']], f.object.subreddits.blank? ? [] : f.object.subreddits[:only]), { multiple: true, class: "server-multiselect form-control" } %>
+        </div>
+
+        <div class="col-md-4">
+          <%= label_tag 'ad[subreddits][excluding][]', 'Excluding:', { class: "control-label" } %>
+          <%= select_tag 'ad[subreddits][excluding][]', options_for_select([['Loading...','Loading...']], f.object.subreddits.blank? ? [] : f.object.subreddits[:excluding]), { multiple: true, class: "server-multiselect form-control" } %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<hr/>
 <div class="row">
   <div class="form-group<%= f.object.errors[:interests].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :interests, { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">
-      <%= f.text_area :interests, { class: "form-control" } %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= label_tag 'ad[interests][similar_to][]', 'Similar To:', { class: "control-label" } %>
+          <%= select_tag 'ad[interests][similar_to][]', options_for_select([['Loading...','Loading...']], f.object.interests.blank? ? [] : f.object.interests[:similar_to]), { multiple: true, class: "server-multiselect form-control" } %>
+        </div>
+        
+        <div class="col-md-4">
+          <%= label_tag 'ad[interests][only][]', 'Only:', { class: "control-label" } %>
+          <%= select_tag 'ad[interests][only][]', options_for_select([['Loading...','Loading...']], f.object.interests.blank? ? [] : f.object.interests[:only]), { multiple: true, class: "server-multiselect form-control" } %>
+        </div>
+
+        <div class="col-md-4">
+          <%= label_tag 'ad[interests][excluding][]', 'Excluding:', { class: "control-label" } %>
+          <%= select_tag 'ad[interests][excluding][]', options_for_select([['Loading...','Loading...']], f.object.interests.blank? ? [] : f.object.interests[:excluding]), { multiple: true, class: "server-multiselect form-control" } %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<hr/>
 <div class="row">
   <div class="form-group<%= f.object.errors[:placements].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :placements, { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">
-      <%= f.text_area :placements, { class: "form-control" } %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= label_tag 'ad[placements][only][]', 'Only:', { class: "control-label" } %>
+          <%= select_tag 'ad[placements][only][]', options_for_select(Ad::ALL_OS_VERSIONS.map {|a| [ a, a ] }, f.object.placements.blank? ? [] : f.object.placements[:only]), { multiple: true, class: "multiselect form-control" } %>
+        </div>
+
+        <div class="col-md-6">
+          <%= label_tag 'ad[placements][excluding][]', 'Excluding:', { class: "control-label" } %>
+          <%= select_tag 'ad[placements][excluding][]', options_for_select(Ad::ALL_OS_VERSIONS.map {|a| [ a, a ] }, f.object.placements.blank? ? [] : f.object.placements[:excluding]), { multiple: true, class: "multiselect form-control" } %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<hr/>
 <div class="row">
   <div class="form-group<%= f.object.errors[:devices].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :devices, { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">
-      <%= f.text_area :devices, { class: "form-control" } %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= label_tag 'ad[devices][similar_to][]', 'Similar To:', { class: "control-label" } %>
+          <%= select_tag 'ad[devices][similar_to][]', options_for_select(Ad::DEVICES.map {|a| [ a, a ] }, f.object.devices.blank? ? [] : f.object.devices[:similar_to]), { multiple: true, class: "multiselect form-control" } %>
+        </div>
+        
+        <div class="col-md-4">
+          <%= label_tag 'ad[devices][only][]', 'Only:', { class: "control-label" } %>
+          <%= select_tag 'ad[devices][only][]', options_for_select(Ad::DEVICES.map {|a| [ a, a ] }, f.object.devices.blank? ? [] : f.object.devices[:only]), { multiple: true, class: "multiselect form-control" } %>
+        </div>
+
+        <div class="col-md-4">
+          <%= label_tag 'ad[devices][excluding][]', 'Excluding:', { class: "control-label" } %>
+          <%= select_tag 'ad[devices][excluding][]', options_for_select(Ad::DEVICES.map {|a| [ a, a ] }, f.object.devices.blank? ? [] : f.object.devices[:excluding]), { multiple: true, class: "multiselect form-control" } %>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
+<hr/>
 <div class="row">
   <div class="form-group<%= f.object.errors[:locations].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :locations, { class: "control-label col-sm-2" } %>
