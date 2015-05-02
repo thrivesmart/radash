@@ -136,12 +136,12 @@
       <div class="row">
         <div class="col-md-6">
           <%= label_tag 'ad[placements][only][]', 'Only:', { class: "control-label" } %>
-          <%= select_tag 'ad[placements][only][]', options_for_select(Ad::ALL_OS_VERSIONS.map {|a| [ a, a ] }, f.object.placements.blank? ? [] : f.object.placements[:only]), { multiple: true, class: "multiselect form-control" } %>
+          <%= select_tag 'ad[placements][only][]', options_for_select(Ad::PLACEMENTS.map {|a| [ a, a ] }, f.object.placements.blank? ? [] : f.object.placements[:only]), { multiple: true, class: "multiselect form-control" } %>
         </div>
 
         <div class="col-md-6">
           <%= label_tag 'ad[placements][excluding][]', 'Excluding:', { class: "control-label" } %>
-          <%= select_tag 'ad[placements][excluding][]', options_for_select(Ad::ALL_OS_VERSIONS.map {|a| [ a, a ] }, f.object.placements.blank? ? [] : f.object.placements[:excluding]), { multiple: true, class: "multiselect form-control" } %>
+          <%= select_tag 'ad[placements][excluding][]', options_for_select(Ad::PLACEMENTS.map {|a| [ a, a ] }, f.object.placements.blank? ? [] : f.object.placements[:excluding]), { multiple: true, class: "multiselect form-control" } %>
         </div>
       </div>
     </div>
@@ -177,7 +177,94 @@
   <div class="form-group<%= f.object.errors[:locations].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :locations, { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">
-      <%= f.text_area :locations, { class: "form-control" } %>
+      <div class="row">
+        <label class="text-muted col-sm-2">Countries</label>
+        <div class="col-sm-10">
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][countries][only][]', 'Only:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][countries][only][]', options_for_select(Ad::COUNTRIES.keys.map {|a| [ Ad::COUNTRIES[a], a ] }, f.object.locations[:countries].blank? ? [] : f.object.locations[:countries][:only]), { multiple: true, class: "searchable-multiselect form-control" } %>
+            </div>
+
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][countries][excluding][]', 'Excluding:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][countries][excluding][]', options_for_select(Ad::COUNTRIES.keys.map {|a| [ Ad::COUNTRIES[a], a ] }, f.object.locations[:countries].blank? ? [] : f.object.locations.locations[:countries][:excluding]), { multiple: true, class: "searchable-multiselect form-control" } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <label class="text-muted col-sm-2">States/Provinces/Regions</label>
+        <div class="col-sm-10">
+          <div class="row">
+            <br/>
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][states_provinces_regions][only][]', 'Only:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][states_provinces_regions][only][]', options_for_select(Ad::STATES.keys.map {|a| [ Ad::STATES[a], a ] }, f.object.locations[:states_provinces_regions].blank? ? [] : f.object.locations[:states_provinces_regions][:only]), { multiple: true, class: "searchable-multiselect form-control" } %>
+            </div>
+
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][states_provinces_regions][excluding][]', 'Excluding:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][states_provinces_regions][excluding][]', options_for_select(Ad::STATES.keys.map {|a| [ Ad::STATES[a], a ] }, f.object.locations[:states_provinces_regions].blank? ? [] : f.object.locations.locations[:states_provinces_regions][:excluding]), { multiple: true, class: "searchable-multiselect form-control" } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <label class="text-muted col-sm-2">Cities</label>
+
+        <div class="col-sm-10">
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][cities][only][]', 'Only:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][cities][only][]', options_for_select([['Loading...','Loading...']], f.object.locations[:cities].blank? ? [] : f.object.locations[:cities][:only]), { multiple: true, class: "server-multiselect form-control" } %>
+            </div>
+
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][cities][excluding][]', 'Excluding:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][cities][excluding][]', options_for_select([['Loading...','Loading...']], f.object.locations[:cities].blank? ? [] : f.object.locations.locations[:cities][:excluding]), { multiple: true, class: "server-multiselect form-control" } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <label class="text-muted col-sm-2">Zip/Postal Codes</label>
+
+        <div class="col-sm-10">
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][zips_postal_codes][only][]', 'Only:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][zips_postal_codes][only][]', options_for_select([['Loading...','Loading...']], f.object.locations[:zips_postal_codes].blank? ? [] : f.object.locations[:zips_postal_codes][:only]), { multiple: true, class: "server-multiselect form-control" } %>
+            </div>
+
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][zips_postal_codes][excluding][]', 'Excluding:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][zips_postal_codes][excluding][]', options_for_select([['Loading...','Loading...']], f.object.locations[:zips_postal_codes].blank? ? [] : f.object.locations.locations[:zips_postal_codes][:excluding]), { multiple: true, class: "server-multiselect form-control" } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <label class="text-muted col-sm-2">Locales</label>
+
+        <div class="col-sm-10">
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][locales][only][]', 'Only:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][locales][only][]', options_for_select(Creative::VALID_LOCALES.map {|a| [ a, a ] }, f.object.locations[:locales].blank? ? [] : f.object.locations[:locales][:only]), { multiple: true, class: "searchable-multiselect form-control" } %>
+            </div>
+
+            <div class="col-md-6">
+              <%= label_tag 'ad[locations][locales][excluding][]', 'Excluding:', { class: "control-label" } %>
+              <%= select_tag 'ad[locations][locales][excluding][]', options_for_select(Creative::VALID_LOCALES.map {|a| [ a, a ] }, f.object.locations[:locales].blank? ? [] : f.object.locations.locations[:locales][:excluding]), { multiple: true, class: "searchable-multiselect form-control" } %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

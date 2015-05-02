@@ -6,4 +6,6 @@
 if ($('select.multiselect').get(0)) {
   $('select.multiselect').multiselect();
   $('select.server-multiselect').multiselect({enableFiltering: true});
+  $('select.searchable-multiselect').multiselect({enableFiltering: true});
+  
 }
