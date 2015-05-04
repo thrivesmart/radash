@@ -26,6 +26,7 @@ class CampaignsController < ApplicationController
   # POST /campaigns
   # POST /campaigns.json
   def create
+    fix_flights_input_param
     @campaign = @org.campaigns.build(campaign_params)
 
     respond_to do |format|
@@ -42,6 +43,7 @@ class CampaignsController < ApplicationController
   # PATCH/PUT /campaigns/1
   # PATCH/PUT /campaigns/1.json
   def update
+    fix_flights_input_param
     respond_to do |format|
       if @campaign.update(campaign_params)
         format.html { redirect_to [@campaign.org, @campaign], notice: 'Campaign was successfully updated.' }
@@ -78,6 +80,20 @@ class CampaignsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def campaign_params
-    params.require(:campaign).permit(:total_budget_in_cents, :name, :goal_value, :goal_type, :flights)
+    params.require(:campaign).permit(:total_budget_in_cents, :name, :goal_value, :goal_type, {flights: [ [:starts_at, :ends_at] ]})
+  end
+  
+  # Change incoming form format to parsed dates
+  def fix_flights_input_param
+    if params[:campaign] && !params[:campaign][:flights].blank? && params[:campaign][:flights].respond_to?(:keys)
+      parsed_flights = []
+      params[:campaign][:flights].keys.each do |key|
+        parsed_flights << { 
+          starts_at:  ActiveSupport::TimeZone[params[:campaign][:flights][key]['starts_at']['timezone']].parse("#{params[:campaign][:flights][key]['starts_at']['date']} #{params[:campaign][:flights][key]['starts_at']['time']}"),
+          ends_at: ActiveSupport::TimeZone[params[:campaign][:flights][key]['ends_at']['timezone']].parse("#{params[:campaign][:flights][key]['ends_at']['date']} #{params[:campaign][:flights][key]['ends_at']['time']}")
+        }
+      end
+      params[:campaign][:flights] = parsed_flights
+    end
   end
 end

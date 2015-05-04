@@ -40,7 +40,7 @@ class AdsController < ApplicationController
   # POST /ads
   # POST /ads.json
   def create
-    fixed_tokenized_input_params
+    fix_tokenized_input_params
     @ad = @org.ads.build(ad_params)
 
     respond_to do |format|
@@ -57,7 +57,7 @@ class AdsController < ApplicationController
   # PATCH/PUT /ads/1
   # PATCH/PUT /ads/1.json
   def update
-    fixed_tokenized_input_params
+    fix_tokenized_input_params
     respond_to do |format|
       if @ad.update(ad_params)
         format.html { redirect_to [@ad.org, @ad], notice: 'Ad was successfully updated.' }
@@ -97,9 +97,8 @@ class AdsController < ApplicationController
     params.require(:ad).permit(:creative_id, :bid_type, :bid_in_cents, {locations: [ {countries: [ {only: []}, {excluding: []} ]}, {states_provinces_regions: [ {only: []}, {excluding: []} ]}, {cities: [ {only: []}, {excluding: []} ]}, {zips_postal_codes:  [ {only: []}, {excluding: []} ]}, {locales:  [ {only: []}, {excluding: []} ]} ]}, { devices: [ {similar_to: []}, {only: []}, {excluding: []} ]}, { os: [ {only: []}, {excluding: []} ]}, { os_versions: [ {only: []}, {excluding: []} ]}, { subreddits: [ {similar_to: []}, {only: []}, {excluding: []} ]}, { interests: [ {similar_to: []}, {only: []}, {excluding: []} ]}, { placements: [ {only: []}, {excluding: []} ]})
   end
   
-  def fixed_tokenized_input_params
-    # logger.debug "~~~~~~~~~~~~~~~~~~~~~~~~ loc: #{params[:locations]} && cit: #{params[:locations][:cities]} && onl: #{params[:locations][:cities][:only]} && size: #{params[:locations][:cities][:only].size}"
-
+  # This takes tokenized fields from parameters and changes them into arrays
+  def fix_tokenized_input_params
     [:cities, :zips_postal_codes].each do |sublocation|
       [:only, :excluding].each do |subcategory|
         if params[:ad] && params[:ad][:locations] && params[:ad][:locations][sublocation] && params[:ad][:locations][sublocation][subcategory] && params[:ad][:locations][sublocation][subcategory].size == 1
