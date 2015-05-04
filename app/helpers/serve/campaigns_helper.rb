@@ -1,0 +1,2 @@
+module Serve::CampaignsHelper
+end

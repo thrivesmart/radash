@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :serve do
+    resources :campaigns
+  end
+
   namespace :ops do
     resources :ads do
       member do
