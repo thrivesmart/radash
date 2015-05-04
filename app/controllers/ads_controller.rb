@@ -92,6 +92,6 @@ class AdsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def ad_params
-    params.require(:ad).permit(:creative_id, :bid_type, :bid_in_cents, :locations, :devices, :os, :os_versions, :subreddits, :interests, :placements)
+    params.require(:ad).permit(:creative_id, :bid_type, :bid_in_cents, {locations: [ {countries: [ {only: []}, {excluding: []} ]}, {states_provinces_regions: [ {only: []}, {excluding: []} ]}, {cities: [ {only: []}, {excluding: []} ]}, {zips_postal_codes:  [ {only: []}, {excluding: []} ]}, {locales:  [ {only: []}, {excluding: []} ]} ]}, { devices: [ {similar_to: []}, {only: []}, {excluding: []} ]}, { os: [ {only: []}, {excluding: []} ]}, { os_versions: [ {only: []}, {excluding: []} ]}, { subreddits: [ {similar_to: []}, {only: []}, {excluding: []} ]}, { interests: [ {similar_to: []}, {only: []}, {excluding: []} ]}, { placements: [ {only: []}, {excluding: []} ]})
   end
 end
