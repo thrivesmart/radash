@@ -48,4 +48,12 @@ class Ad < ActiveRecord::Base
   def title
     "#{self.creative.title} @ $#{self.bid_in_cents / 100.00} #{self.bid_type}"
   end
+  
+  def update_as_approved_by(u)
+    if !self.approved_at.blank?
+      errors.add(:approved_at, " - has already been approved") 
+      return false
+    end
+    self.update_attributes(approved_at: Time.now, approver_name: u.username)
+  end
 end

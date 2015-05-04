@@ -1,0 +1,82 @@
+<% content_for :page_title do %>
+Creatives - 
+<% end %>
+<div class="container">
+  
+  <div class="btn-toolbar" role="toolbar">
+    <div class="btn-group">
+      <a href="<%= ops_ads_path %>" role="button" class="btn btn-default">Ads</a>
+      <a href="<%= ops_creatives_path %>" role="button" class="btn btn-default">Creatives</a>
+    </div>
+  </div>
+  
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, root_path, class: "btn btn-default", title: "Back" %>
+        &nbsp;
+      </div>
+
+      Listing Creatives
+
+      <small>All</small>
+    </h1>
+  </div>
+
+  <table class="table table-striped table-hover tablesorter" id="Creatives-table">
+
+
+    <thead>
+      <tr>
+
+        <th><span>Org</span></th>
+        <th><span>Asset</span></th>
+        <th><span>Title</span></th>
+        <th><span>Url</span></th>
+        <th><span>Postername</span></th>
+        <th><span>Posterid</span></th>
+        <th><span>Promoted thingid</span></th>
+        <th><span>Locale</span></th>
+        <th><span>Approver name</span></th>
+        <th><span>Approve?</span></th>
+    
+      </tr>
+    </thead>
+
+    <tbody>
+      <% unless @creatives.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="11">No creatives created yet.</td>
+      </tr>
+      <% end %>
+      <% @creatives.each do |creative| %>
+      <tr>
+
+        <td><%= link_to creative.org.name, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.asset.id, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.title, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.url, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.postername, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.posterid, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.promoted_thingid, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.locale, org_creative_path(creative.org, creative) %></td>
+        <td><%= link_to creative.approver_name.blank? ? '' : creative.approver_name, org_creative_path(creative.org, creative) %></td>
+        <td>
+          <% if creative.approved_at.blank? %>
+          <a class="btn btn-xs btn-info creative-approve-now-button" data-creative-approvenow-prompt="Really mark `<%= creative.title %>` as approved?" data-creative-approvenow-path="<%= approve_ops_creative_path(creative, format: 'json') %>">Approve Now...</a>
+          <% else %>
+          <%= link_to creative.approved_at.strftime('%D %I:%M %p'), org_creative_path(creative.org, creative) %>
+          <% end %>
+        </td>
+      
+      
+      
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+

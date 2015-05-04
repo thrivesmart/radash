@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
 
+  namespace :ops do
+    resources :ads do
+      member do
+        put :approve
+      end
+    end
+    resources :creatives do
+      member do
+        put :approve
+      end
+    end
+  end
+
   get 'reddit_proxy/subreddits'
 
   namespace :admin do

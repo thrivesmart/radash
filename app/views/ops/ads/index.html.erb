@@ -1,0 +1,77 @@
+<% content_for :page_title do %>
+Ads - 
+<% end %>
+<div class="container">
+  
+  <div class="btn-toolbar" role="toolbar">
+    <div class="btn-group">
+      <a href="<%= ops_ads_path %>" role="button" class="btn btn-default">Ads</a>
+      <a href="<%= ops_creatives_path %>" role="button" class="btn btn-default">Creatives</a>
+    </div>
+  </div>
+  
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, root_path, class: "btn btn-default", title: "Back" %>
+        &nbsp;
+      </div>
+
+      Listing Ads!
+      <small>All</small>
+    </h1>
+  </div>
+
+  <table class="table table-striped table-hover tablesorter" id="Ads-table">
+
+
+    <thead>
+      <tr>
+
+        <th><span>Org</span></th>
+        <th><span>Creative</span></th>
+        <th><span>Bid type</span></th>
+        <th><span>Bid</span></th>
+        <th><span>Placements</span></th>
+        <th><span>Paused at</span></th>
+        <th><span>Approver name</span></th>
+        <th><span>Approve?</span></th>
+      
+      </tr>
+    </thead>
+
+    <tbody>
+      <% unless @ads.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="14">No ads created yet.</td>
+      </tr>
+      <% end %>
+      <% @ads.each do |ad| %>
+      <tr>
+    
+        <td><%= link_to ad.org.name, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.creative.title, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.bid_type, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to number_to_currency(ad.bid_in_cents / 100.00), org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.placements.blank? ? '[all]' : ad.placements, org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.paused_at.blank? ? '' : ad.paused_at.strftime('%D %I:%M %p'), org_ad_path(ad.org, ad) %></td>
+        <td><%= link_to ad.approver_name.blank? ? '' : ad.approver_name, org_ad_path(ad.org, ad) %></td>
+        <td>
+          <% if ad.approved_at.blank? %>
+          <a class="btn btn-xs btn-info ad-approve-now-button" data-ad-approvenow-prompt="Really mark `<%= ad.title %>` as approved?" data-ad-approvenow-path="<%= approve_ops_ad_path(ad, format: 'json') %>">Approve Now...</a>
+          <% else %>
+          <%= link_to ad.approved_at.strftime('%D %I:%M %p'), org_ad_path(ad.org, ad) %>
+          <% end %>
+        </td>
+        
+        
+        
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+

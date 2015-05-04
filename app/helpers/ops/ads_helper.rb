@@ -1,0 +1,2 @@
+module Ops::AdsHelper
+end

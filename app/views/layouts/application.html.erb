@@ -21,7 +21,9 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-
+        <% if authed_user && authed_user.superuser %>
+          <li<%= request.path.starts_with?("/ops/") ? " class=\"active\"".html_safe : "" %>><a href="<%= ops_ads_path %>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Ops</a></li>
+        <% end %>
       </ul> 
       <% if !authed_user %><%# ---- logged out ---- %>
       <ul class="nav navbar-nav navbar-right">

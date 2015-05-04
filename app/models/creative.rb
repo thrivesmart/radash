@@ -4,4 +4,12 @@ class Creative < ActiveRecord::Base
   belongs_to :asset
   
   validates :org, presence: true
+  
+  def update_as_approved_by(u)
+    if !self.approved_at.blank?
+      errors.add(:approved_at, " - has already been approved") 
+      return false
+    end
+    self.update_attributes(approved_at: Time.now, approver_name: u.username)
+  end
 end
