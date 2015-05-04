@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'reddit_proxy/subreddits'
 
   namespace :admin do
     resources :orgs do

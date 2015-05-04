@@ -1,0 +1,2 @@
+module RedditProxyHelper
+end

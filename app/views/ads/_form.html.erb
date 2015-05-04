@@ -88,17 +88,17 @@
       <div class="row">
         <div class="col-md-4">
           <%= label_tag 'ad[subreddits][similar_to][]', 'Similar To:', { class: "control-label" } %>
-          <%= select_tag 'ad[subreddits][similar_to][]', options_for_select([['Loading...','Loading...']], f.object.subreddits.blank? ? [] : f.object.subreddits[:similar_to]), { multiple: true, class: "server-multiselect form-control" } %>
+          <%= text_field_tag 'ad[subreddits][similar_to][]', nil, { placeholder: "Type something and hit enter", class: "subreddits-tokenfield form-control" } %>
         </div>
         
         <div class="col-md-4">
           <%= label_tag 'ad[subreddits][only][]', 'Only:', { class: "control-label" } %>
-          <%= select_tag 'ad[subreddits][only][]', options_for_select([['Loading...','Loading...']], f.object.subreddits.blank? ? [] : f.object.subreddits[:only]), { multiple: true, class: "server-multiselect form-control" } %>
+          <%= text_field_tag 'ad[subreddits][only][]', nil, { placeholder: "Type something and hit enter", class: "subreddits-tokenfield form-control" } %>
         </div>
 
         <div class="col-md-4">
           <%= label_tag 'ad[subreddits][excluding][]', 'Excluding:', { class: "control-label" } %>
-          <%= select_tag 'ad[subreddits][excluding][]', options_for_select([['Loading...','Loading...']], f.object.subreddits.blank? ? [] : f.object.subreddits[:excluding]), { multiple: true, class: "server-multiselect form-control" } %>
+          <%= text_field_tag 'ad[subreddits][excluding][]', nil, { placeholder: "Type something and hit enter", class: "subreddits-tokenfield form-control" } %>
         </div>
       </div>
     </div>
@@ -112,17 +112,17 @@
       <div class="row">
         <div class="col-md-4">
           <%= label_tag 'ad[interests][similar_to][]', 'Similar To:', { class: "control-label" } %>
-          <%= select_tag 'ad[interests][similar_to][]', options_for_select([['Loading...','Loading...']], f.object.interests.blank? ? [] : f.object.interests[:similar_to]), { multiple: true, class: "server-multiselect form-control" } %>
+          <%= text_field_tag 'ad[interests][similar_to][]', nil, { placeholder: "Type something and hit enter", class: "subreddits-tokenfield form-control" } %>
         </div>
         
         <div class="col-md-4">
           <%= label_tag 'ad[interests][only][]', 'Only:', { class: "control-label" } %>
-          <%= select_tag 'ad[interests][only][]', options_for_select([['Loading...','Loading...']], f.object.interests.blank? ? [] : f.object.interests[:only]), { multiple: true, class: "server-multiselect form-control" } %>
+          <%= text_field_tag 'ad[interests][only][]', nil, { placeholder: "Type something and hit enter", class: "subreddits-tokenfield form-control" } %>
         </div>
 
         <div class="col-md-4">
           <%= label_tag 'ad[interests][excluding][]', 'Excluding:', { class: "control-label" } %>
-          <%= select_tag 'ad[interests][excluding][]', options_for_select([['Loading...','Loading...']], f.object.interests.blank? ? [] : f.object.interests[:excluding]), { multiple: true, class: "server-multiselect form-control" } %>
+          <%= text_field_tag 'ad[interests][excluding][]', nil, { placeholder: "Type something and hit enter", class: "subreddits-tokenfield form-control" } %>
         </div>
       </div>
     </div>
@@ -219,12 +219,12 @@
           <div class="row">
             <div class="col-md-6">
               <%= label_tag 'ad[locations][cities][only][]', 'Only:', { class: "control-label" } %>
-              <%= select_tag 'ad[locations][cities][only][]', options_for_select([['Loading...','Loading...']], f.object.locations[:cities].blank? ? [] : f.object.locations[:cities][:only]), { multiple: true, class: "server-multiselect form-control" } %>
+              <%= text_field_tag 'ad[locations][cities][only][]', nil, { placeholder: "Type something and hit enter", class: "manual-tokenfield form-control" } %>
             </div>
 
             <div class="col-md-6">
               <%= label_tag 'ad[locations][cities][excluding][]', 'Excluding:', { class: "control-label" } %>
-              <%= select_tag 'ad[locations][cities][excluding][]', options_for_select([['Loading...','Loading...']], f.object.locations[:cities].blank? ? [] : f.object.locations.locations[:cities][:excluding]), { multiple: true, class: "server-multiselect form-control" } %>
+              <%= text_field_tag 'ad[locations][cities][excluding][]', nil, { placeholder: "Type something and hit enter", class: "manual-tokenfield form-control" } %>
             </div>
           </div>
         </div>
@@ -237,12 +237,12 @@
           <div class="row">
             <div class="col-md-6">
               <%= label_tag 'ad[locations][zips_postal_codes][only][]', 'Only:', { class: "control-label" } %>
-              <%= select_tag 'ad[locations][zips_postal_codes][only][]', options_for_select([['Loading...','Loading...']], f.object.locations[:zips_postal_codes].blank? ? [] : f.object.locations[:zips_postal_codes][:only]), { multiple: true, class: "server-multiselect form-control" } %>
+              <%= text_field_tag 'ad[locations][zips_postal_codes][only][]', nil, { placeholder: "Type something and hit enter", class: "manual-tokenfield form-control" } %>
             </div>
 
             <div class="col-md-6">
               <%= label_tag 'ad[locations][zips_postal_codes][excluding][]', 'Excluding:', { class: "control-label" } %>
-              <%= select_tag 'ad[locations][zips_postal_codes][excluding][]', options_for_select([['Loading...','Loading...']], f.object.locations[:zips_postal_codes].blank? ? [] : f.object.locations.locations[:zips_postal_codes][:excluding]), { multiple: true, class: "server-multiselect form-control" } %>
+              <%= text_field_tag 'ad[locations][zips_postal_codes][excluding][]', nil, { placeholder: "Type something and hit enter", class: "manual-tokenfield form-control" } %>
             </div>
           </div>
         </div>
