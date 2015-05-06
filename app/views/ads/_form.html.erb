@@ -155,7 +155,7 @@
       <div class="row">
         <div class="col-md-4">
           <%= label_tag 'ad[devices][similar_to][]', 'Similar To:', { class: "control-label" } %>
-          <%= select_tag 'ad[devices][similar_to][]', options_for_select(Ad::DEVICES.map {|a| [ a, a ] }, f.object.devices.blank? ? [] : f.object.devices[:similar_to]), { multiple: true, class: "multiselect form-control" } %>
+          <%= select_tag 'ad[devices][similar_to][]', options_for_select(([].concat(Ad::DEVICE_SIMILARITY_MAP.keys).concat(Ad::DEVICES)).map {|a| [ a, a ] }, f.object.devices.blank? ? [] : f.object.devices[:similar_to]), { multiple: true, class: "multiselect form-control" } %>
         </div>
         
         <div class="col-md-4">

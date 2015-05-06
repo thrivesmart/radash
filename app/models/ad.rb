@@ -15,7 +15,11 @@ class Ad < ActiveRecord::Base
     'Symbian' => ['9.3+', '9.4+', '9.5+', '10.0+', '10.1+']
   }
   ALL_OS_VERSIONS = [].concat(OS_VERSIONS.keys.map { |k| OS_VERSIONS[k].map { |v| "#{k.downcase.underscore}-#{v}" } }).flatten
-  DEVICES = [ 'Desktop/Laptop', 'Tablet', 'Smartphone', 'iPhone', 'iPad', 'iPod', 'Kindle Fire' ]
+  DEVICES = [ 'iPhone', 'iPad', 'iPod', 'Kindle Fire' ]
+  DEVICE_SIMILARITY_MAP = {
+    'Tablet' => ['iPad', 'Kindle Fire'],
+    'Desktop/Laptop' => ['Other']
+  }
   PLACEMENTS = [ 'Promoted Post', 'Mobile Feed', 'Right Hand Column' ]
   
   COUNTRIES = {	
