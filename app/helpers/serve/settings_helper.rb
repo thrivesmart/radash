@@ -1,0 +1,2 @@
+module Serve::SettingsHelper
+end

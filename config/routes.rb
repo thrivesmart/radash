@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-
+  
   namespace :serve do
     resources :campaigns
+    get 'settings/index'
   end
 
   namespace :ops do
