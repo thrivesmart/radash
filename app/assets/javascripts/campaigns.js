@@ -28,3 +28,29 @@ var CampaignForm = {
 if ($('#add-flight-button').get(0)) {
   CampaignForm.init();
 }
+
+
+var CampaignShow = {
+  init: function() {
+    var target = $('#campaign-total-spent');
+    $.getJSON(target.attr('data-endpoint') + "?spend=true", function(data) {
+      $('#campaign-total-spent').text('$' + data.SpendInDollars);
+    });
+    
+    // Fetch ad information from each row
+    $('tr.campaign-ad-row').each(function(i,trEl) {
+      var tr = $(trEl);
+      var adId = tr.attr('data-ad-id');
+      $.getJSON(target.attr('data-endpoint') + "?aid="+adId, function(data) {
+        tr.find('td.impressions').text(data.TotalImpressions);
+        tr.find('td.clicks').text(data.TotalClicks);
+        var ctr = data.Ctr * 100.00;
+        tr.find('td.ctr').text(ctr + "%");
+      });
+    });
+  }
+}
+
+if ($('#campaign-total-spent').get(0)) {
+  CampaignShow.init();
+}

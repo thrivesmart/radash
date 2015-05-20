@@ -1,7 +1,9 @@
 class CampaignsController < ApplicationController
+  PERFORMANCE_HOST = "http://rads.herokuapp.com"
+  
   before_action :set_org
   before_filter :enforce_org_administrator
-  before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  before_action :set_campaign, only: [:show, :performance, :edit, :update, :destroy]
 
   # GET /campaigns
   # GET /campaigns.json
@@ -21,6 +23,20 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/1/edit
   def edit
+  end
+
+  # GET /campaigns/1/performance.json?aid= | spend=true  
+  def performance
+    @result = ""
+    if !params[:spend].blank?
+      @result = ActiveSupport::JSON.decode(Net::HTTP.get(URI.parse("#{PERFORMANCE_HOST}/reports/campaign-spend.json?cid=#{@campaign.id}")))
+    else
+      @result = ActiveSupport::JSON.decode(Net::HTTP.get(URI.parse("#{PERFORMANCE_HOST}/reports/campaign-ad-performance.json?cid=#{@campaign.id}&aid=#{params[:aid]}")))
+    end
+    
+    respond_to do |format|
+      format.json { render json: @result }
+    end
   end
 
   # POST /campaigns

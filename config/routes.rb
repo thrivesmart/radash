@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     resources :ads
     resources :creatives
     resources :campaigns do
+      member do
+        get :performance
+      end
       resources :ads_campaigns
     end
     resources :assets

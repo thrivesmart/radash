@@ -25,7 +25,12 @@ campaign Details -
     <label class="col-sm-3 text-right text-muted">Total budget</label>
     <div class="col-sm-9"><%= number_to_currency(@campaign.total_budget_in_cents / 100.00) %></div>
   </div>
-
+  
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Total Spent</label>
+    <div class="col-sm-9" id="campaign-total-spent" data-endpoint="<%= performance_org_campaign_path(@campaign.org, @campaign, format: 'json') %>"><span class="text-muted">Loading...</span></div>
+  </div>
+  
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Goal value</label>
     <div class="col-sm-9"><%= @campaign.goal_value %></div>
@@ -68,6 +73,9 @@ campaign Details -
     <thead>
       <tr>
         <th><span>Ad</span></th>
+        <th><span>Impressions</span></th>
+        <th><span>Clicks</span></th>
+        <th><span>CTR</span></th>
         <th><span>Remove</span></th>
       </tr>
     </thead>
@@ -75,12 +83,15 @@ campaign Details -
     <tbody>
       <% unless @campaign.ads.any? %>
       <tr id="empty-table">
-        <td class="bg-warning" colspan="2">No ads added yet.</td>
+        <td class="bg-warning" colspan="5">No ads added yet.</td>
       </tr>
       <% end %>
       <% @campaign.ads.each do |ad| %>
-      <tr>
+      <tr class="campaign-ad-row" data-ad-id="<%= ad.id %>" data-endpoint="<%= performance_org_campaign_path(@campaign.org, @campaign, format: 'json') %>">
         <td><%= link_to ad.title, [ad.org, ad] %></td>
+        <td class="impressions"><span class="text-muted">Loading...</span></td>
+        <td class="clicks"><span class="text-muted">Loading...</span></td>
+        <td class="ctr"><span class="text-muted">Loading...</span></td>
         <td><%= link_to "<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span> Delete Ad...".html_safe, org_campaign_ads_campaign_path(@campaign.org, @campaign, ad), method: :delete, data: { confirm: "Are you sure you want to remove this ad from this campaign?" }, class: "btn btn-danger" %></td>
       </tr>
       <% end %>
